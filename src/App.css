@@ -1,7 +1,59 @@
 .app {
+  position: relative;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 10% 15%,
+      rgba(76, 201, 255, 0.08),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(118, 103, 255, 0.1),
+      transparent 28%
+    );
+}
+.app::before {
+  content: "x²   √x   π   ∫   ∑   ∆";
+  position: absolute;
+  top: 80px;
+  left: -20px;
+
+  width: 110%;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  letter-spacing: 30px;
+
+  color: rgba(108, 158, 255, 0.07);
+  white-space: nowrap;
+
+  pointer-events: none;
+  user-select: none;
+
+  transform: rotate(-5deg);
+}
+
+.app::after {
+  content: "f(x)   y = mx + c   a² + b² = c²";
+  position: absolute;
+  right: -80px;
+  bottom: 180px;
+
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: 14px;
+
+  color: rgba(118, 103, 255, 0.06);
+  white-space: nowrap;
+
+  pointer-events: none;
+  user-select: none;
+
+  transform: rotate(8deg);
 }
 
 .site-header {
@@ -339,5 +391,852 @@
     flex-direction: column;
     align-items: flex-start;
     padding: 16px 0;
+  }
+}
+/* =========================================
+   NEW MATH HERO
+   ========================================= */
+
+.hero {
+  position: relative;
+  width: min(1280px, calc(100% - 48px));
+  min-height: 680px;
+  margin: 0 auto 70px;
+  padding: 80px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+  overflow: hidden;
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at 80% 40%, rgba(99, 102, 241, 0.25), transparent 35%),
+    radial-gradient(circle at 20% 20%, rgba(34, 211, 238, 0.15), transparent 30%),
+    linear-gradient(135deg, #07152f, #101b45 55%, #171044);
+  color: white;
+}
+
+/* Hero content */
+
+.hero-content {
+  position: relative;
+  z-index: 5;
+  width: 55%;
+  max-width: 700px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 16px;
+  margin-bottom: 24px;
+  border: 1px solid rgba(120, 210, 255, 0.3);
+  border-radius: 999px;
+  background: rgba(60, 180, 255, 0.12);
+  color: #9eeaff;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.hero h1 {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: clamp(3rem, 5vw, 5rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.055em;
+  color: white;
+}
+
+.hero h1 span {
+  display: block;
+  background: linear-gradient(90deg, #55e7ff, #8b7cff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-description {
+  margin-top: 25px;
+  max-width: 650px;
+  color: #c8d4ef;
+  font-size: 1.12rem;
+  line-height: 1.7;
+}
+
+/* Buttons */
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 32px;
+}
+
+.hero-primary-button,
+.hero-secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 54px;
+  padding: 0 24px;
+  border-radius: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-primary-button {
+  border: none;
+  background: linear-gradient(135deg, #38cfff, #7567ff);
+  color: white;
+  box-shadow: 0 12px 30px rgba(76, 129, 255, 0.3);
+}
+
+.hero-primary-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 35px rgba(76, 129, 255, 0.45);
+}
+
+.hero-primary-button span {
+  font-size: 1.3rem;
+}
+
+.hero-secondary-button {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  color: white;
+}
+
+.hero-secondary-button:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Feature row */
+
+.hero-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin-top: 45px;
+}
+
+.hero-feature {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #dce6ff;
+}
+
+.feature-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.09);
+  font-size: 1.1rem;
+}
+
+.hero-feature strong,
+.hero-feature small {
+  display: block;
+}
+
+.hero-feature strong {
+  font-size: 0.88rem;
+}
+
+.hero-feature small {
+  margin-top: 2px;
+  color: #8797ba;
+  font-size: 0.75rem;
+}
+
+/* =========================================
+   AI TUTOR VISUAL
+   ========================================= */
+
+.hero-visual {
+  position: relative;
+  z-index: 3;
+  width: 45%;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glow {
+  position: absolute;
+  width: 330px;
+  height: 330px;
+  border-radius: 50%;
+  background: rgba(67, 202, 255, 0.18);
+  filter: blur(60px);
+}
+
+/* Tutor */
+
+.tutor-orb {
+  position: relative;
+  z-index: 4;
+  width: 230px;
+  height: 190px;
+  border-radius: 48% 48% 45% 45%;
+  background: linear-gradient(145deg, #ffffff, #b9d0ed);
+  box-shadow:
+    0 30px 70px rgba(0, 0, 0, 0.35),
+    inset 0 -10px 20px rgba(80, 120, 180, 0.2);
+  animation: floatingTutor 4s ease-in-out infinite;
+}
+
+.orb-face {
+  position: absolute;
+  left: 35px;
+  right: 35px;
+  top: 35px;
+  height: 95px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 35px;
+  background: #07142e;
+  box-shadow: inset 0 0 25px rgba(64, 193, 255, 0.2);
+}
+
+.orb-face span {
+  color: #63dcff;
+  font-size: 2.3rem;
+  font-weight: 600;
+}
+
+.orb-antenna {
+  position: absolute;
+  width: 12px;
+  height: 38px;
+  left: calc(50% - 6px);
+  top: -35px;
+  border-radius: 10px;
+  background: #9bb9df;
+}
+
+.orb-antenna::before {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: -6px;
+  top: -15px;
+  border-radius: 50%;
+  background: #62dfff;
+  box-shadow: 0 0 25px rgba(98, 223, 255, 0.8);
+}
+
+/* Speech bubbles */
+
+.speech-bubble {
+  position: absolute;
+  z-index: 8;
+  max-width: 190px;
+  padding: 13px 16px;
+  border: 1px solid rgba(130, 170, 255, 0.35);
+  border-radius: 18px;
+  background: rgba(16, 31, 70, 0.9);
+  color: #eaf2ff;
+  font-size: 0.84rem;
+  line-height: 1.4;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(12px);
+}
+
+.bubble-one {
+  top: 55px;
+  left: 0;
+  animation: bubbleFloat 4s ease-in-out infinite;
+}
+
+.bubble-two {
+  top: 155px;
+  right: -5px;
+  background: rgba(69, 107, 220, 0.85);
+  animation: bubbleFloat 4s ease-in-out infinite 1s;
+}
+
+.bubble-three {
+  bottom: 100px;
+  left: 5px;
+  animation: bubbleFloat 4s ease-in-out infinite 2s;
+}
+
+/* Notebook */
+
+.math-notebook {
+  position: absolute;
+  z-index: 7;
+  right: 10px;
+  bottom: 25px;
+  width: 210px;
+  padding: 18px;
+  border-radius: 8px;
+  transform: rotate(5deg);
+  background: #fffdf7;
+  color: #17213b;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.notebook-title {
+  color: #6d7690;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.equation {
+  margin-top: 15px;
+  font-family: Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.notebook-line {
+  margin-top: 13px;
+  padding-top: 10px;
+  border-top: 1px dashed #c8cdd8;
+  font-family: Georgia, serif;
+}
+
+.notebook-note {
+  margin-top: 13px;
+  color: #59657e;
+  font-size: 0.75rem;
+}
+
+/* =========================================
+   FLOATING MATH ELEMENTS
+   ========================================= */
+
+.floating-math {
+  position: absolute;
+  z-index: 1;
+  color: rgba(119, 196, 255, 0.35);
+  font-family: Georgia, serif;
+  font-size: 2.5rem;
+  pointer-events: none;
+  animation: mathFloat 5s ease-in-out infinite;
+}
+
+.math-one {
+  top: 80px;
+  right: 35%;
+}
+
+.math-two {
+  top: 42%;
+  right: 8%;
+  font-size: 3rem;
+}
+
+.math-three {
+  bottom: 50px;
+  left: 45%;
+}
+
+.math-four {
+  top: 18%;
+  left: 48%;
+  font-size: 2rem;
+}
+
+/* Topic cards */
+
+.floating-card {
+  position: absolute;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #dbe8ff;
+  font-size: 0.78rem;
+  backdrop-filter: blur(10px);
+  animation: cardFloat 5s ease-in-out infinite;
+}
+
+.floating-card span {
+  color: #68dfff;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.card-algebra {
+  top: 25px;
+  right: 20px;
+}
+
+.card-geometry {
+  left: 30px;
+  bottom: 45px;
+  animation-delay: 1s;
+}
+
+.card-calculus {
+  right: 55px;
+  top: 410px;
+  animation-delay: 2s;
+}
+
+/* =========================================
+   ANIMATIONS
+   ========================================= */
+
+@keyframes floatingTutor {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes bubbleFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes mathFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-15px) rotate(5deg);
+  }
+}
+
+@keyframes cardFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 900px) {
+  .hero {
+    width: min(100% - 28px, 700px);
+    padding: 55px 25px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-content {
+    width: 100%;
+  }
+
+  .hero-description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-features {
+    justify-content: center;
+  }
+
+  .hero-visual {
+    width: 100%;
+    min-height: 450px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding: 45px 18px;
+    border-radius: 22px;
+  }
+
+  .hero h1 {
+    font-size: 2.65rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .hero-primary-button,
+  .hero-secondary-button {
+    width: 100%;
+  }
+
+  .hero-visual {
+    transform: scale(0.82);
+    min-height: 390px;
+    margin-top: -20px;
+  }
+
+  .floating-card,
+  .floating-math {
+    display: none;
+  }
+
+  .hero-features {
+    gap: 15px;
+  }
+}
+/* =========================================================
+   NEW MATH TUTOR SECTION
+   ========================================================= */
+
+.tutor-section {
+  width: min(1100px, calc(100% - 32px));
+  margin: 0 auto 100px;
+}
+
+.tutor-card {
+  position: relative;
+  overflow: hidden;
+  padding: 42px;
+  border-radius: 30px;
+  border: 1px solid rgba(100, 190, 255, 0.22);
+  background:
+    radial-gradient(circle at 90% 0%, rgba(120, 90, 255, 0.18), transparent 32%),
+    radial-gradient(circle at 0% 100%, rgba(40, 200, 255, 0.12), transparent 30%),
+    rgba(10, 24, 55, 0.92);
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.tutor-card::before {
+  content: "";
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  top: -140px;
+  right: -80px;
+  border-radius: 50%;
+  background: rgba(78, 196, 255, 0.12);
+  filter: blur(30px);
+  pointer-events: none;
+}
+
+.tutor-intro {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 42px;
+}
+
+.tutor-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 54px;
+  height: 54px;
+  border-radius: 17px;
+  background: linear-gradient(135deg, #48d8ff, #7565ff);
+  font-size: 25px;
+  box-shadow: 0 10px 30px rgba(70, 190, 255, 0.25);
+}
+
+.tutor-eyebrow {
+  margin-bottom: 7px;
+  color: #62d8ff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+
+.tutor-intro h2 {
+  margin-bottom: 8px;
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  line-height: 1.15;
+  color: #ffffff;
+}
+
+.tutor-intro > div:last-child > p:last-child {
+  max-width: 680px;
+  color: rgba(235, 243, 255, 0.7);
+  font-size: 1rem;
+}
+
+.tutor-question {
+  position: relative;
+  margin-top: 30px;
+}
+
+.tutor-question label {
+  display: block;
+  margin-bottom: 12px;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.tutor-helper {
+  margin: -4px 0 12px;
+  color: rgba(235, 243, 255, 0.55);
+  font-size: 0.9rem;
+}
+
+.option-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.option-chip {
+  padding: 10px 16px;
+  border: 1px solid rgba(125, 190, 255, 0.2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.055);
+  color: rgba(245, 249, 255, 0.88);
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.option-chip:hover {
+  transform: translateY(-2px);
+  border-color: rgba(80, 210, 255, 0.65);
+  background: rgba(60, 190, 255, 0.12);
+}
+
+.topic-grid {
+  max-width: 900px;
+}
+
+.tutor-input {
+  width: 100%;
+  min-height: 155px;
+  resize: vertical;
+  box-sizing: border-box;
+  padding: 18px;
+  border: 1px solid rgba(120, 190, 255, 0.2);
+  border-radius: 18px;
+  outline: none;
+  background: rgba(3, 13, 34, 0.72);
+  color: #ffffff;
+  font-size: 1rem;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.tutor-input::placeholder {
+  color: rgba(220, 235, 255, 0.38);
+}
+
+.tutor-input:focus {
+  border-color: rgba(72, 216, 255, 0.75);
+  box-shadow: 0 0 0 4px rgba(72, 216, 255, 0.08);
+}
+
+.tutor-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 14px;
+}
+
+.char-count {
+  color: rgba(225, 238, 255, 0.5);
+  font-size: 0.85rem;
+}
+
+.tutor-analyze-button {
+  padding: 13px 21px;
+  border: 0;
+  border-radius: 13px;
+  background: linear-gradient(100deg, #39caff, #7165ff);
+  color: #ffffff;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(77, 154, 255, 0.2);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.tutor-analyze-button span {
+  margin-left: 7px;
+  font-size: 1.1rem;
+}
+
+.tutor-analyze-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 35px rgba(77, 154, 255, 0.32);
+}
+
+/* Handwritten solution upload */
+
+.upload-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 28px;
+  padding: 20px;
+  border: 1px dashed rgba(95, 205, 255, 0.35);
+  border-radius: 18px;
+  background: rgba(80, 180, 255, 0.045);
+}
+
+.upload-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: rgba(75, 205, 255, 0.12);
+  color: #5cdbff;
+  font-size: 25px;
+}
+
+.upload-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.upload-content strong {
+  color: #ffffff;
+  font-size: 0.95rem;
+}
+
+.upload-content span {
+  color: rgba(225, 238, 255, 0.5);
+  font-size: 0.82rem;
+}
+
+.upload-button {
+  padding: 10px 15px;
+  border: 1px solid rgba(110, 200, 255, 0.3);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.upload-button:hover {
+  background: rgba(80, 190, 255, 0.12);
+}
+
+/* Examples */
+
+.examples {
+  position: relative;
+  margin-top: 32px;
+}
+
+.examples-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 13px;
+  color: rgba(235, 243, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.example-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.example-chip {
+  max-width: 100%;
+  padding: 9px 13px;
+  border: 1px solid rgba(125, 190, 255, 0.16);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.045);
+  color: rgba(235, 243, 255, 0.7);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.example-chip:hover {
+  transform: translateY(-2px);
+  background: rgba(80, 190, 255, 0.1);
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+  .tutor-card {
+    padding: 25px 18px;
+    border-radius: 23px;
+  }
+
+  .tutor-intro {
+    gap: 13px;
+    margin-bottom: 30px;
+  }
+
+  .tutor-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 14px;
+  }
+
+  .tutor-meta {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .tutor-analyze-button {
+    width: 100%;
+  }
+
+  .upload-box {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .upload-content {
+    min-width: calc(100% - 65px);
+  }
+
+  .upload-button {
+    width: 100%;
   }
 }
