@@ -109,3 +109,116 @@ misconception-tutor/
 ├── package.json
 ├── package-lock.json
 └── README.md
+🔌 API
+Health Check
+GET /api/health
+
+Used to check whether the backend is running.
+
+Tutor
+POST /api/tutor
+
+Example request:
+
+{
+  "message": "I think x squared means x multiplied by 2",
+  "classLevel": "Class 10",
+  "topic": "Algebra"
+}
+
+Example response:
+
+{
+  "success": true,
+  "reply": "AI-generated tutoring response..."
+}
+💻 Running Locally
+1. Clone the repository
+git clone YOUR-GITHUB-REPOSITORY-URL
+cd misconception-tutor
+2. Install dependencies
+npm install
+3. Create .env
+
+Create a .env file in the project root:
+
+GEMINI_API_KEY=YOUR_GEMINI_API_KEY
+
+Never commit your .env file or expose your API key publicly.
+
+4. Start the backend
+node server/server.js
+
+The backend runs on:
+
+http://localhost:5000
+5. Start the frontend
+
+Open another terminal:
+
+npm run dev
+
+The Vite development server will provide the frontend URL.
+
+🔐 Environment Variables
+
+The project requires:
+
+GEMINI_API_KEY=YOUR_GEMINI_API_KEY
+
+The API key should be stored securely as an environment variable.
+
+For deployment, add the variable through the hosting provider's environment-variable settings instead of putting the key inside the source code.
+
+🎓 Example Use Case
+
+A student might write:
+
+"I think x squared means x multiplied by 2."
+
+Instead of simply giving an answer, Misconception Tutor can explain the difference between:
+
+x²
+
+and
+
+2x
+
+and then ask the student a short question to check their understanding.
+
+This makes the interaction focused on learning the concept, not just obtaining the answer.
+
+🌟 Hackathon Goal
+
+Misconception Tutor explores how AI can be used as a learning companion that focuses on understanding student misconceptions rather than simply generating answers.
+
+The project was built as a prototype for the CodeMyFYP Hackathon.
+
+👥 Project
+
+Project: Misconception Tutor
+
+Category: AI / Education
+
+Built with: React, Node.js, Express and Google Gemini
+
+
+### Then do this
+
+1. Replace:
+   ```text
+   PASTE-YOUR-RENDER-URL-HERE
+
+with your actual Render URL.
+
+Replace:
+
+PASTE-YOUR-GITHUB-URL-HERE
+
+with your GitHub repository URL.
+
+Save README.md.
+Push it:
+git add README.md
+git commit -m "Add project README"
+git push
