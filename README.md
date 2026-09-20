@@ -1,16 +1,111 @@
-# React + Vite
+# 🧠 Misconception Tutor
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An AI-powered mathematics tutor that helps students identify and correct their misconceptions instead of simply giving them the final answer.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**Live Demo:** PASTE-YOUR-RENDER-URL-HERE
 
-## React Compiler
+**GitHub Repository:** PASTE-YOUR-GITHUB-URL-HERE
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🎯 Problem
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Students often make mistakes in mathematics because of misunderstandings in their basic concepts.
+
+Traditional AI tutors often provide the correct answer immediately. This can solve the current question without helping the student understand where their thinking went wrong.
+
+Misconception Tutor is designed to focus on the student's **thinking process**.
+
+---
+
+## 💡 Solution
+
+Misconception Tutor uses AI to:
+
+- Understand what the student is thinking.
+- Identify possible mathematical misconceptions.
+- Explain the mistake in simple language.
+- Guide the student toward the correct understanding.
+- Ask questions that encourage the student to think.
+- Avoid immediately giving the complete answer.
+
+The goal is to help students **understand why they made a mistake**, not just tell them what the answer is.
+
+---
+
+## ✨ Features
+
+### 🤖 AI Mathematics Tutor
+Students can describe their problem in natural language and receive an AI-generated response.
+
+### 🔍 Misconception Detection
+The tutor analyzes the student's explanation to identify possible misunderstandings.
+
+### 💬 Conversational Learning
+Instead of behaving like a textbook, the tutor responds conversationally.
+
+### 🎓 Student Context
+The student can provide their:
+
+- Class level
+- Topic
+- Question or misconception
+
+### 🧠 Socratic-style Guidance
+The tutor can ask short questions that encourage students to reason about their mistake.
+
+### ⚡ Real-time Responses
+The frontend communicates with the backend API and receives AI-generated responses.
+
+---
+
+## 🛠️ Technology Stack
+
+### Frontend
+- React
+- Vite
+- JavaScript
+- CSS
+
+### Backend
+- Node.js
+- Express.js
+- CORS
+- dotenv
+
+### AI
+- Google Gemini API
+- `@google/genai`
+
+### Deployment
+- Frontend: Vite application
+- Backend: Render
+- Source Code: GitHub
+
+---
+
+## 🏗️ Project Structure
+
+```text
+misconception-tutor/
+│
+├── public/
+│
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── App.jsx
+│   ├── App.css
+│   ├── index.css
+│   └── main.jsx
+│
+├── server/
+│   └── server.js
+│
+├── .env
+├── .gitignore
+├── package.json
+├── package-lock.json
+└── README.md
