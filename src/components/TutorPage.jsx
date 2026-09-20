@@ -53,31 +53,70 @@ function TutorPage() {
     setStarted(true);
   }
 
-  function sendMessage(event) {
-    event.preventDefault();
+ async function sendMessage(event) {
+  event.preventDefault();
 
-    const studentMessage = message.trim();
+  const studentMessage = message.trim();
 
-    if (!studentMessage && !attachment) {
-      return;
+  if (!studentMessage && !attachment) {
+    return;
+  }
+
+  const currentAttachment = attachmentPreview;
+
+  // Show the student's message immediately
+  setMessages((current) => [
+    ...current,
+    {
+      sender: "student",
+      text: studentMessage,
+      attachment: currentAttachment,
+    },
+  ]);
+
+  // Clear the input
+  setMessage("");
+  removeAttachment();
+
+  try {
+    const response = await fetch("http://localhost:5000/api/tutor", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message: studentMessage,
+        classLevel,
+        topic,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Backend request failed");
     }
+
+    const data = await response.json();
 
     setMessages((current) => [
       ...current,
       {
-        sender: "student",
-        text: studentMessage,
-        attachment: attachmentPreview,
-      },
-      {
         sender: "tutor",
-        text: "Thanks for explaining that. Let me look at your thinking carefully. I want to find the exact step where the idea became confusing.",
+        text: data.reply,
       },
     ]);
+  } catch (error) {
+    console.error("Tutor API error:", error);
+alert(error.message);
 
-    setMessage("");
-    removeAttachment();
+    setMessages((current) => [
+      ...current,
+      {
+        sender: "tutor",
+        text: "I'm having trouble connecting to the tutor server right now. Please try again.",
+      },
+    ]);
   }
+}
 
   function handleKeyDown(event) {
     if (event.key === "Enter" && !event.shiftKey) {
@@ -225,70 +264,41 @@ function TutorPage() {
         </section>
 
         <form
-          className="conversation-input"
-          onSubmit={sendMessage}
-        >
+  className="conversation-input"
+  onSubmit={sendMessage}
+>
+  <label
+    className="attachment-button"
+    title="Attach a photo or file"
+  >
+    📎
+    <input
+      type="file"
+      accept="image/*,.pdf"
+      hidden
+    />
+  </label>
 
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*"
-            onChange={handleAttachment}
-            hidden
-          />
+  <textarea
+    value={message}
+    onChange={(event) => setMessage(event.target.value)}
+    onKeyDown={(event) => {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        event.currentTarget.form.requestSubmit();
+      }
+    }}
+    placeholder="Tell your tutor what you were thinking..."
+    rows="1"
+  />
 
-          <button
-            type="button"
-            className="attachment-button"
-            onClick={() => fileInputRef.current?.click()}
-            title="Attach a photo"
-          >
-            📎
-          </button>
-
-          <div className="conversation-input-main">
-
-            {attachmentPreview && (
-              <div className="attachment-preview">
-
-                <img
-                  src={attachmentPreview}
-                  alt="Selected attachment"
-                />
-
-                <span>
-                  {attachment?.name}
-                </span>
-
-                <button
-                  type="button"
-                  onClick={removeAttachment}
-                  aria-label="Remove attachment"
-                >
-                  ×
-                </button>
-
-              </div>
-            )}
-
-            <textarea
-              value={message}
-              onChange={(event) => setMessage(event.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="Tell your tutor what you were thinking..."
-              rows="1"
-            />
-
-          </div>
-
-          <button
-            type="submit"
-            className="send-button"
-          >
-            Send →
-          </button>
-
-        </form>
+  <button
+    type="submit"
+    className="send-message-button"
+  >
+    Send →
+  </button>
+</form>
 
         <div className="conversation-hint">
           💡 Enter to send · Shift + Enter for a new line

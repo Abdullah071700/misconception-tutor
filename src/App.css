@@ -1707,374 +1707,460 @@ img {
 }
 
 
-/* =========================================================
-   CHAT CONTAINER
-   ========================================================= */
+/* =========================================
+   CHAT PAGE - FINAL LAYOUT
+   ========================================= */
 
 .conversation-container {
-  position: relative;
-
-  z-index: 5;
-
   width: 100%;
-  height: 100svh;
-
+  height: 100dvh;
+  min-height: 0;
   margin: 0;
+  padding: 18px 24px 14px;
+  box-sizing: border-box;
 
   display: flex;
   flex-direction: column;
 
-  padding: 20px 38px 16px;
+  position: relative;
+  z-index: 2;
 
   overflow: hidden;
-
-  color: #f5f8ff;
 }
 
-
-/* =========================================================
-   CHAT HEADER ROW
-   ========================================================= */
+/* ---------- TOP BAR ---------- */
 
 .conversation-back {
-  align-self: flex-start;
+  position: absolute;
+  top: 24px;
+  left: 28px;
 
-  flex-shrink: 0;
+  padding: 8px 14px;
 
-  padding: 7px 10px;
-
-  margin: 0 0 4px;
-
-  border: 0;
-
+  border: none;
   background: transparent;
 
-  color: #dce9ff;
-
-  font-size: 0.95rem;
-
+  color: #ffffff;
+  font-size: 15px;
   cursor: pointer;
 
-  transition:
-    color 0.2s ease,
-    transform 0.2s ease;
+  z-index: 5;
 }
 
 .conversation-back:hover {
-  color: white;
-
-  transform: translateX(-2px);
+  opacity: 0.75;
 }
 
+/* ---------- TUTOR HEADER ---------- */
+
 .conversation-header {
-  position: relative;
+  width: fit-content;
+  margin: 0 auto 18px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  min-height: 52px;
+}
+
+.tutor-mini-avatar {
+  width: 48px;
+  height: 48px;
 
   flex-shrink: 0;
 
   display: flex;
   align-items: center;
-
-  gap: 14px;
-
-  width: min(650px, 100%);
-
-  margin: 0 auto;
-
-  padding: 0 0 13px;
-}
-
-.conversation-header .tutor-mini-avatar {
-  width: 48px;
-  height: 48px;
+  justify-content: center;
 
   border-radius: 14px;
 
-  flex-shrink: 0;
+  background: linear-gradient(
+    135deg,
+    #28bdf5,
+    #6366f1
+  );
+
+  color: white;
+  font-size: 22px;
+
+  box-shadow: 0 8px 22px rgba(50, 120, 255, 0.25);
 }
 
-.conversation-header>div:nth-child(2) {
+.conversation-header > div:nth-child(2) {
   display: flex;
   flex-direction: column;
-
   gap: 2px;
-
-  min-width: 0;
 }
 
 .conversation-header strong {
-  display: block;
-
-  color: white;
-
-  font-size: 1.15rem;
-
-  line-height: 1.2;
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 1.1;
 }
 
-.conversation-header>div:nth-child(2) span {
-  display: block;
-
-  margin: 0;
-
-  color: #91a8c9;
-
-  font-size: 0.82rem;
+.conversation-header span {
+  color: #8ea7cc;
+  font-size: 13px;
 }
 
 .online-indicator {
   display: flex;
-
   align-items: center;
-
   gap: 7px;
 
-  margin-left: 8px;
+  margin-left: 10px;
 
-  color: #91a9ca;
-
-  font-size: 0.8rem;
-
-  white-space: nowrap;
+  color: #a9b8d4;
+  font-size: 14px;
 }
 
 .online-indicator span {
-  width: 8px;
-  height: 8px;
-
-  flex-shrink: 0;
+  width: 9px;
+  height: 9px;
 
   border-radius: 50%;
+  background: #39e6a0;
 
-  background: #4be3a0;
-
-  box-shadow:
-    0 0 12px rgba(75, 227, 160, 0.8);
+  box-shadow: 0 0 10px rgba(57, 230, 160, 0.7);
 }
 
+/* ---------- CLEAR CHAT ---------- */
 
-/* =========================================================
-   CHAT MESSAGES
-   ========================================================= */
+.conversation-header::after {
+  content: "♙  Clear Chat";
+
+  position: fixed;
+  top: 22px;
+  right: 28px;
+
+  padding: 9px 15px;
+
+  border: 1px solid rgba(90, 170, 255, 0.45);
+  border-radius: 10px;
+
+  color: #ffffff;
+  background: rgba(10, 35, 75, 0.5);
+
+  font-size: 14px;
+
+  cursor: pointer;
+}
+
+/* ---------- CHAT AREA ---------- */
 
 .conversation-messages {
-  flex: 1;
-
+  flex: 1 1 auto;
   min-height: 0;
-
-  width: min(1250px, 100%);
-
-  margin: 0 auto;
-
-  padding: 24px 70px 18px;
+  width: 100%;
 
   overflow-y: auto;
   overflow-x: hidden;
 
-  display: flex;
-  flex-direction: column;
-
-  gap: 18px;
+  padding: 8px 3.5% 20px;
+  box-sizing: border-box;
 
   scrollbar-width: thin;
-
-  scrollbar-color:
-    rgba(100, 160, 220, 0.45) transparent;
+  scrollbar-color: rgba(100, 170, 255, 0.45) transparent;
 }
+
+.conversation-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.conversation-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.conversation-messages::-webkit-scrollbar-thumb {
+  background: rgba(100, 170, 255, 0.45);
+  border-radius: 10px;
+}
+
+/* ---------- MESSAGE ROW ---------- */
 
 .conversation-message {
   display: flex;
-
   align-items: flex-start;
 
-  gap: 12px;
+  width: 100%;
 
-  width: fit-content;
-
-  max-width: min(760px, 72%);
+  margin-bottom: 14px;
 }
 
 .conversation-message.tutor {
-  align-self: flex-start;
+  justify-content: flex-start;
 }
 
 .conversation-message.student {
-  align-self: flex-end;
-
-  flex-direction: row-reverse;
+  justify-content: flex-end;
 }
 
+/* ---------- TUTOR AVATAR ---------- */
+
 .message-avatar {
-  width: 34px;
-  height: 34px;
+  width: 38px;
+  height: 38px;
 
   flex-shrink: 0;
 
-  display: grid;
-  place-items: center;
+  margin-right: 10px;
 
-  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  border-radius: 10px;
+  border-radius: 11px;
 
-  background:
-    linear-gradient(135deg,
-      #39c6ff,
-      #6855ed);
+  background: linear-gradient(
+    135deg,
+    #26bdf5,
+    #6264ed
+  );
 
   color: white;
-
-  font-size: 16px;
+  font-size: 17px;
 }
 
+/* ---------- MESSAGE BUBBLE ---------- */
+
 .message-bubble {
-  padding: 14px 18px;
+  width: fit-content;
+  max-width: 70%;
+  min-width: 120px;
 
-  border-radius: 17px;
+  box-sizing: border-box;
 
-  color: #e8f1ff;
+  padding: 12px 16px;
+  border-radius: 14px;
 
-  font-size: 16px;
+  color: #f3f7ff;
 
-  line-height: 1.55;
+  font-size: 15px;
+  line-height: 1.5;
 
-  word-wrap: break-word;
+  word-break: normal;
+  overflow-wrap: break-word;
 
-  overflow-wrap: anywhere;
+  white-space: normal;
 }
 
 .conversation-message.tutor .message-bubble {
-  background: rgba(38, 72, 119, 0.72);
-
-  border: 1px solid rgba(107, 171, 232, 0.18);
+  background: rgba(38, 76, 125, 0.72);
+  border: 1px solid rgba(90, 160, 230, 0.22);
 
   border-top-left-radius: 5px;
 }
 
 .conversation-message.student .message-bubble {
-  background:
-    linear-gradient(135deg,
-      #2da9e8,
-      #5d4fe0);
+  background: linear-gradient(
+    135deg,
+    #159bea,
+    #5456e8
+  );
 
   border-top-right-radius: 5px;
-
-  color: white;
 }
 
-
-/* =========================================================
-   CHAT INPUT
-   ========================================================= */
+/* ---------- INPUT ---------- */
 
 .conversation-input {
-  flex-shrink: 0;
+  width: 100%;
+  min-height: 68px;
 
-  width: min(1250px, 100%);
+  flex: 0 0 auto;
 
-  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 
-  padding: 10px 0 0;
+  padding: 8px;
+  box-sizing: border-box;
+
+  border: 1px solid rgba(74, 154, 235, 0.28);
+  border-radius: 18px;
+
+  background: rgba(8, 34, 70, 0.72);
+  backdrop-filter: blur(12px);
 }
 
+/* ---------- ATTACHMENT ---------- */
+
+.attachment-button {
+  width: 48px;
+  height: 48px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(76, 164, 255, 0.35);
+  border-radius: 13px;
+
+  background: rgba(24, 68, 115, 0.75);
+
+  color: #b9d9ff;
+
+  font-size: 22px;
+
+  cursor: pointer;
+}
+
+.attachment-button:hover {
+  background: rgba(38, 91, 150, 0.9);
+}
+
+/* ---------- TEXT BOX ---------- */
+
 .conversation-input textarea {
-  display: block;
+  flex: 1;
 
-  width: 100%;
+  width: auto;
+  min-width: 0;
 
-  min-height: 58px;
+  min-height: 48px;
   max-height: 150px;
 
-  padding: 14px 17px;
+  resize: vertical;
 
-  resize: none;
+  box-sizing: border-box;
 
-  border: 1px solid rgba(91, 174, 255, 0.4);
+  padding: 13px 15px;
 
-  border-radius: 14px;
+  border: 1px solid rgba(71, 166, 255, 0.4);
+  border-radius: 13px;
 
   outline: none;
 
-  background: rgba(20, 54, 94, 0.82);
+  background: rgba(17, 52, 91, 0.85);
 
-  color: white;
+  color: #ffffff;
 
-  font-family: inherit;
-
-  font-size: 16px;
-
-  line-height: 1.45;
-
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+  font-size: 15px;
+  line-height: 1.4;
 }
 
 .conversation-input textarea::placeholder {
-  color: #7893b8;
+  color: #7d9ac0;
 }
 
 .conversation-input textarea:focus {
-  border-color: #4bc5ff;
-
-  box-shadow:
-    0 0 0 3px rgba(75, 197, 255, 0.1);
+  border-color: #32bfff;
+  box-shadow: 0 0 0 2px rgba(50, 191, 255, 0.1);
 }
 
-.conversation-input button {
-  margin-top: 8px;
+/* ---------- SEND ---------- */
 
-  height: 44px;
+.send-message-button {
+  height: 48px;
+
+  flex-shrink: 0;
 
   padding: 0 22px;
 
   border: none;
+  border-radius: 13px;
 
-  border-radius: 12px;
+  background: linear-gradient(
+    135deg,
+    #31baf4,
+    #5758e9
+  );
 
-  background:
-    linear-gradient(135deg,
-      #35b9f3,
-      #5b51e5);
-
-  color: white;
+  color: #ffffff;
 
   font-size: 15px;
-
   font-weight: 700;
 
   cursor: pointer;
-
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
 }
 
-.conversation-input button:hover {
+.send-message-button:hover {
   transform: translateY(-1px);
-
-  box-shadow:
-    0 8px 20px rgba(65, 140, 235, 0.25);
 }
 
-
-/* =========================================================
-   CHAT HINT
-   ========================================================= */
+/* ---------- HINT ---------- */
 
 .conversation-hint {
-  flex-shrink: 0;
-
-  width: min(1250px, 100%);
-
-  margin: 6px auto 0;
+  padding-top: 8px;
 
   text-align: center;
 
-  color: #718caf;
+  color: #7893b9;
 
   font-size: 12px;
+}
 
-  line-height: 1.4;
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 700px) {
+
+  .conversation-container {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .conversation-back {
+    top: 12px;
+    left: 12px;
+  }
+
+  .conversation-header {
+    margin-top: 4px;
+    margin-bottom: 12px;
+  }
+
+  .tutor-mini-avatar {
+    width: 42px;
+    height: 42px;
+  }
+
+  .conversation-header strong {
+    font-size: 17px;
+  }
+
+  .conversation-header span {
+    font-size: 12px;
+  }
+
+  .online-indicator {
+    font-size: 12px;
+  }
+
+  .conversation-header::after {
+    top: 12px;
+    right: 12px;
+    padding: 7px 10px;
+    font-size: 12px;
+  }
+
+  .conversation-messages {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  .message-bubble {
+    max-width: 78%;
+    font-size: 14px;
+  }
+
+  .conversation-input {
+    min-height: 60px;
+    border-radius: 14px;
+  }
+
+  .attachment-button {
+    width: 42px;
+    height: 42px;
+  }
+
+  .send-message-button {
+    height: 42px;
+    padding: 0 14px;
+  }
 }
 
 
